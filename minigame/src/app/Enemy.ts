@@ -18,7 +18,7 @@ export class Enemy implements IBox, IMovable {
 
     // inital pos
     this.box = new Box(
-      'black',
+      'red',
       new Position(
         canvas.width - width,
         floor.box.pos.top - height,

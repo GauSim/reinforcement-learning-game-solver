@@ -17,12 +17,12 @@ export class Position {
 
 export class Box implements IBox {
   constructor(
-    public color: 'red' | 'blue' | 'black' | 'transparent' = 'red',
+    public color: 'red' | 'blue' | 'black' | 'transparent' | string = 'red',
     public readonly pos: Position = new Position(0, 0, 0, 0)
   ) { }
 
-  public draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = this.color;
+  public draw(ctx: CanvasRenderingContext2D, fillStyle: null | string | CanvasGradient | CanvasPattern = null) {
+    ctx.fillStyle = fillStyle ? fillStyle : this.color;
     ctx.fillRect(this.pos.left, this.pos.top, this.pos.width, this.pos.height);
   }
 }

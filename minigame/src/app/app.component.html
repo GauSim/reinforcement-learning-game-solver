@@ -1,72 +1,55 @@
-<canvas #canvas width="1200" height="500"></canvas>
+<canvas #canvas width="1400" height="600"></canvas>
 <hr>
 
 <style>
-  .sprite1 {
+  .spRoot {
     float: left;
     width: 80px;
     height: 90px;
     background-image: url('../assets/hero_spritesheet.png');
     border: 1px solid red;
+  }
+
+  .sprite1 {
     background-position-x: 0px;
     background-position-y: -285px;
   }
 
   .sprite2 {
-    float: left;
-    width: 80px;
-    height: 90px;
-    background-image: url('../assets/hero_spritesheet.png');
-    border: 1px solid red;
     background-position-x: -80px;
     background-position-y: -285px;
   }
 
   .sprite3 {
-    float: left;
-    width: 80px;
-    height: 90px;
-    background-image: url('../assets/hero_spritesheet.png');
-    border: 1px solid red;
     background-position-x: -160px;
     background-position-y: -285px;
   }
 
   .sprite4 {
-    float: left;
-    width: 80px;
-    height: 90px;
-    background-image: url('../assets/hero_spritesheet.png');
-    border: 1px solid red;
     background-position-x: -240px;
     background-position-y: -100px;
   }
+
   .sprite5 {
-    float: left;
-    width: 80px;
-    height: 90px;
-    background-image: url('../assets/hero_spritesheet.png');
-    border: 1px solid red;
     background-position-x: -320px;
     background-position-y: -100px;
   }
 
   .sprite6 {
-    float: left;
-    width: 80px;
-    height: 90px;
-    background-image: url('../assets/hero_spritesheet.png');
-    border: 1px solid red;
     background-position-x: -400px;
     background-position-y: -100px;
   }
 </style>
-<div class="sprite1"></div>
-<div class="sprite2"></div>
-<div class="sprite3"></div>
-<div class="sprite4"></div>
-<div class="sprite5"></div>
-<div class="sprite6"></div>
-<div style="clear: both;"></div>
-<hr>
-<img #heroSprite src="../assets/hero_spritesheet.png">
+<div style="display: none;">
+  <div class="spRoot sprite1"></div>
+  <div class="spRoot sprite2"></div>
+  <div class="spRoot sprite3"></div>
+  <div class="spRoot sprite4"></div>
+  <div class="spRoot sprite5"></div>
+  <div class="spRoot sprite6"></div>
+  <div style="clear: both;"></div>
+  <hr>
+</div>
+
+<img #heroSprite src="../assets/hero_spritesheet.png" style="display: none;">
+<img #wallSprite src="../assets/wall.png" style="display: none;">
