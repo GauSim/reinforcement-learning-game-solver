@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
 
     this.enemies.filter(b => b.isOutOfSight === false)
       .forEach(box => {
-        // box.move(this.speed);
+        box.move(this.speed);
         box.draw(this.ctx);
       });
 
