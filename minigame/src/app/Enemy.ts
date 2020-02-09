@@ -21,7 +21,7 @@ export class Enemy implements IBox, IMovable {
       'black',
       new Position(
         canvas.width - width,
-        floor.box.pos.y - height,
+        floor.box.pos.top - height,
         width,
         height
       )
@@ -29,8 +29,8 @@ export class Enemy implements IBox, IMovable {
   }
 
   move(speed: number) {
-    this.box.pos.x -= speed;
-    if (this.box.pos.x < 0) {
+    this.box.pos.left -= speed;
+    if (this.box.pos.left < 0) {
       this.isOutOfSight = true;
     }
   }

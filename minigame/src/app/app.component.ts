@@ -4,6 +4,14 @@ import { Enemy } from './Enemy';
 import { Floor } from './Floor';
 import { Player } from './Player';
 
+/***
+ * 
+ * hero sprite taken from 
+ * https://opengameart.org/content/2d-hero
+ * CC-BY 3.0 & GPL 3.0 by tokka
+ * 
+ */
+
 
 export enum KEY_CODE {
   RIGHT_ARROW = 39,
@@ -13,10 +21,10 @@ export enum KEY_CODE {
 
 function isCollide(a: Position, b: Position) {
   return !(
-    ((a.y + a.h) < (b.y)) ||
-    (a.y > (b.y + b.h)) ||
-    ((a.x + a.w) < b.x) ||
-    (a.x > (b.x + b.w))
+    ((a.top + a.height) < (b.top)) ||
+    (a.top > (b.top + b.height)) ||
+    ((a.left + a.width) < b.left) ||
+    (a.left > (b.left + b.width))
   );
 }
 
@@ -27,6 +35,7 @@ function isCollide(a: Position, b: Position) {
 })
 export class AppComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('heroSprite', { static: true }) heroSprite: ElementRef<HTMLImageElement>;
 
   ctx: CanvasRenderingContext2D;
   requestId: number;
@@ -73,7 +82,7 @@ export class AppComponent implements OnInit {
     this.points = this.enemies.filter(b => b.isOutOfSight === true).length * 20;
 
     this.floor.draw(this.ctx);
-    this.player.draw(this.ctx);
+    this.player.draw(this.ctx, this.distance);
 
     const isCollision = this.isCollision(this.enemies, this.player);
 
@@ -81,7 +90,7 @@ export class AppComponent implements OnInit {
 
     this.enemies.filter(b => b.isOutOfSight === false)
       .forEach(box => {
-        box.move(this.speed);
+        // box.move(this.speed);
         box.draw(this.ctx);
       });
 
@@ -122,7 +131,7 @@ export class AppComponent implements OnInit {
     this.isGameOver = false;
     this.floor = new Floor(this.canvas.nativeElement);
     const enemy = new Enemy(this.canvas.nativeElement, this.floor, this.difficulty);
-    this.player = new Player(this.floor);
+    this.player = new Player(this.floor, this.heroSprite.nativeElement);
 
     this.enemies = this.enemies.concat(enemy);
   }
@@ -132,3 +141,16 @@ export class AppComponent implements OnInit {
     cancelAnimationFrame(this.requestId);
   }
 }
+
+
+/***
+ *
+   this.ctx.drawImage(
+      img,
+      400,100, // Start at 0/0 pixels from the left and the top of the image (crop),
+      80, 90, // "Get" a `50 * 50` (w * h) area from the source image (crop),
+      0, 0,     // Place the result at 0, 0 in the canvas,
+      80, 90 // With as width / height: 100 * 100 (scale)
+    );
+ *
+ */
