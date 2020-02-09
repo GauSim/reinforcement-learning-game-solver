@@ -17,7 +17,7 @@ export class Player {
 
 
   public box: Box;
- 
+
 
   constructor(
     private floor: Floor,
@@ -28,7 +28,7 @@ export class Player {
     const width = 40;
 
     this.box = new Box(
-      'transparent', // 'red'
+      'transparent', // 'red', // 
       new Position(
         50 + width,
         floor.box.pos.top - height,
@@ -63,8 +63,8 @@ export class Player {
         [400, 100],
       ])
       .set('jump', [
-        [80, 285],
-        [160, 285],
+        [90, 275],
+        [170, 275],
       ])
 
     const sprite = map.get(this.animationType);
@@ -79,7 +79,7 @@ export class Player {
         }
         break;
       case 'jump':
-        if (distance % 120 === 0) {
+        if (distance % 50 === 0) {
           nextSpriteIntex++
         }
         break;
@@ -94,10 +94,10 @@ export class Player {
     const spriteBorderBottom = 9;
     ctx.drawImage(
       this.sprite,
-      left, top, // Start at 0/0 pixels from the left and the top of the image (crop),
-      80, 90, // "Get" a `50 * 50` (w * h) area from the source image (crop),
-      this.box.pos.left-10, (this.box.pos.top + spriteBorderBottom),     // Place the result at 0, 0 in the canvas,
-      80, 90 // With as width / height: 100 * 100 (scale)
+      left, top,
+      80, 90,
+      this.box.pos.left - 10, (this.box.pos.top + spriteBorderBottom),     // Place the result at 0, 0 in the canvas,
+      80, 90
     );
 
   }
