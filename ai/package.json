@@ -1,0 +1,16 @@
+{
+  "name": "ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ai.js",
+  "scripts": {
+    "start": "node_modules/.bin/ts-node console.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "reimprovejs": "0.0.2",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  }
+}

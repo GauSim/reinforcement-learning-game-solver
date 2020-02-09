@@ -22,10 +22,10 @@ function isCollide(a: Position, b: Position) {
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
+  templateUrl: 'game.component.html',
   styles: ['canvas { border-style: solid }']
 })
-export class AppComponent implements OnInit {
+export class GameComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('heroSprite', { static: true }) heroSprite: ElementRef<HTMLImageElement>;
   @ViewChild('wallSprite', { static: true }) wallSprite: ElementRef<HTMLImageElement>;
