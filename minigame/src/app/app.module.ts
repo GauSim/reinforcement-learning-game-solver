@@ -14,7 +14,7 @@ import { VisualComponent } from './visual/visual.component';
   ],
   providers: [],
   bootstrap: [
-    VisualComponent //  GameComponent
+     VisualComponent // GameComponent
   ]
 })
 export class AppModule { }

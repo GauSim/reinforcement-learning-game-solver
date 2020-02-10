@@ -29,7 +29,7 @@ export class VisualComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D;
   requestId: number;
-  renderScale = 25;
+  renderScale = 50;
   posList: Map<string, Pos> = new Map();
 
   // AI Vars
