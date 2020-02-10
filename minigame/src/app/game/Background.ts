@@ -1,4 +1,4 @@
-import { Box, IBox, Position } from './models';
+import { Box, IBox, Position } from '../common/models';
 
 export class Background {
   public box: Box;

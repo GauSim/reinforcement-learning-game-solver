@@ -1,4 +1,4 @@
-import { IBox, Box, Position } from "./models";
+import { IBox, Box, Position } from "../common/models";
 
 import { Floor } from "./Floor";
 

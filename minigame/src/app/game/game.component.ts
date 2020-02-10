@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, NgZone, HostListener } from '@angular/core';
-import { IBox, Box, Position, IMovable } from './models';
+import { IBox, Box, Position, IMovable } from '../common/models';
 import { Enemy } from './Enemy';
 import { Floor } from './Floor';
 import { Player } from './Player';

@@ -1,4 +1,4 @@
-import { IBox, Position, Box } from './models';
+import { IBox, Position, Box } from '../common/models';
 
 export class Floor implements IBox {
   public box: Box;
