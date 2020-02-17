@@ -7,14 +7,16 @@ import { VisualComponent } from './visual/visual.component';
 @NgModule({
   declarations: [
     GameComponent,
-    VisualComponent
+    VisualComponent,
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
   bootstrap: [
-     VisualComponent // GameComponent
+    //PointFinderComponent
+    VisualComponent 
+    // GameComponent //  // 
   ]
 })
 export class AppModule { }

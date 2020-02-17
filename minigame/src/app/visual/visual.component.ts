@@ -104,6 +104,10 @@ export class VisualComponent implements OnInit {
     network.InputShape = [totalInputSize];
     network.addNeuralNetworkLayers([
       { type: 'dense', units: 32, activation: 'relu' },
+
+      // { type: 'dense', units: 32, activation: 'relu' },
+      // { type: 'dense', units: 32, activation: 'relu' },
+
       { type: 'dense', units: numActions, activation: 'softmax' }
     ]);
 

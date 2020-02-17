@@ -1,0 +1,37 @@
+<html>
+
+<head>
+  <!-- Load TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <!-- Load Posenet -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+</head>
+
+<script>
+
+  function run() {
+
+    var flipHorizontal = false;
+
+    var imageElement = document.getElementById('imgSrc');
+
+    posenet.load()
+      .then(function (net) {
+        const pose = net.estimateSinglePose(imageElement, {
+          flipHorizontal: true
+        });
+        return pose;
+      }).then(function (pose) {
+        console.log(pose);
+      })
+  }
+
+
+</script>
+
+<body>
+  <img id='imgSrc' src='/img.jpg' onload="run()" style="display:none;" />
+</body>
+
+
+</html>
