@@ -15,8 +15,8 @@ import { VisualComponent } from './visual/visual.component';
   providers: [],
   bootstrap: [
     //PointFinderComponent
-    VisualComponent 
-    // GameComponent //  // 
+    //VisualComponent 
+    GameComponent
   ]
 })
 export class AppModule { }

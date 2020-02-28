@@ -28,8 +28,10 @@ export class Enemy implements IBox, IMovable {
     );
   }
 
-  move(speed: number) {
-    this.box.pos.left -= speed;
+  move() {
+
+    this.box.pos.left -= 1.5;
+
     if (this.box.pos.left < 0) {
       this.isOutOfSight = true;
     }

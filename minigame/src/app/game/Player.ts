@@ -1,5 +1,4 @@
-import { IBox, Box, Position } from "../common/models";
-
+import { Box, Position } from "../common/models";
 import { Floor } from "./Floor";
 
 
@@ -10,14 +9,12 @@ export class Player {
   private spriteIntex = 0;
   private animationType: AnimationType = 'walk';
 
-  private jumpSpeed = 10;
   private isJumping = false;
   private isJumpingUp = false;
   private isJumpingDown = false;
-
+  private jumpDistanceCurrent = 0;
 
   public box: Box;
-
 
   constructor(
     private floor: Floor,
@@ -28,7 +25,7 @@ export class Player {
     const width = 40;
 
     this.box = new Box(
-      'transparent', // 'red', // 
+      'transparent',
       new Position(
         50 + width,
         floor.box.pos.top - height,
@@ -42,7 +39,7 @@ export class Player {
     if (this.isJumping) return;
     this.isJumping = true;
     this.isJumpingUp = true;
-
+    this.jumpDistanceCurrent = 0;
     this.changeAnimation('jump');
   }
 
@@ -96,29 +93,40 @@ export class Player {
       this.sprite,
       left, top,
       80, 90,
-      this.box.pos.left - 10, (this.box.pos.top + spriteBorderBottom),     // Place the result at 0, 0 in the canvas,
+      this.box.pos.left - 10, (this.box.pos.top + spriteBorderBottom),
       80, 90
     );
 
   }
 
   draw(ctx: CanvasRenderingContext2D, distance: number) {
+    const maxDistance = 100;
+
+    this.jumpDistanceCurrent = this.isJumping ?
+      (this.jumpDistanceCurrent + 1)
+      : this.jumpDistanceCurrent
+
+    if (this.isJumping && this.jumpDistanceCurrent > maxDistance) {
+      this.isJumpingDown = true;
+    }
+
+    const jumpSpeed = 10;
 
     if (this.isJumpingUp) {
-      const min = 50;
-      let newTop = this.box.pos.top - this.jumpSpeed;
+      const minTop = 250; // height of the jump 
+      let newTop = this.box.pos.top - jumpSpeed;
 
-      newTop = newTop < min ? min : newTop;
+      newTop = newTop < minTop
+        ? minTop
+        : newTop;
 
-      if (newTop === min) { this.isJumpingUp = false; }
-
-      setTimeout(() => { this.isJumpingDown = true; }, 300); // lengh of the jump
+      if (newTop === minTop || this.isJumpingDown) { this.isJumpingUp = false; }
 
       this.box.pos.top = newTop;
     }
 
     if (this.isJumpingDown) {
-      let newTop = this.box.pos.top + this.jumpSpeed;
+      let newTop = this.box.pos.top + jumpSpeed;
 
       const max = this.floor.box.pos.top - this.box.pos.height;
 

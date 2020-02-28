@@ -3,6 +3,7 @@ import { IBox, Box, Position, IMovable } from '../common/models';
 import { Enemy } from './Enemy';
 import { Floor } from './Floor';
 import { Player } from './Player';
+import { Stats } from './Stats';
 import { Background } from './Background';
 
 export enum KEY_CODE {
@@ -29,20 +30,20 @@ export class GameComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('heroSprite', { static: true }) heroSprite: ElementRef<HTMLImageElement>;
   @ViewChild('wallSprite', { static: true }) wallSprite: ElementRef<HTMLImageElement>;
-  
+
   ctx: CanvasRenderingContext2D;
   requestId: number;
   interval: any;
 
   isGameOver = true;
-  points: number = 0;
-  distance: number = 0;
+
   difficulty = 1;
 
-  speed = 1.5;
+  distance: number = 0;
 
   enemies: Enemy[] = [];
   floor: Floor = null;
+  stats: Stats = null;
   background: Background = null;
   player: Player = null;
 
@@ -60,7 +61,7 @@ export class GameComponent implements OnInit {
     let isCollision = false;
     enemies.forEach(enemy => {
       if (isCollide(enemy.box.pos, player.box.pos)) {
-        isCollision = true
+        isCollision = true;
       }
     })
     return isCollision;
@@ -71,30 +72,22 @@ export class GameComponent implements OnInit {
       return;
     }
     this.distance += 1;
-    this.points = this.enemies.filter(b => b.isOutOfSight === true).length * 20;
-
 
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.background.draw(this.ctx);
     this.floor.draw(this.ctx);
     this.player.draw(this.ctx, this.distance);
 
-    const isCollision = this.isCollision(this.enemies, this.player);
-
-    if (isCollision) { this.isGameOver = true; }
+    if (this.isCollision(this.enemies, this.player)) { this.isGameOver = true; }
 
     this.enemies.filter(b => b.isOutOfSight === false)
       .forEach(box => {
-        box.move(this.speed);
+        box.move();
         box.draw(this.ctx);
       });
 
-    this.ctx.font = "20px Arial";
-    this.ctx.fillText(`points: ${this.points}`, this.canvas.nativeElement.width - 200, 50);
-    this.ctx.fillText(`distance: ${this.distance} m`, this.canvas.nativeElement.width - 200, 100);
-    const [first] = this.enemies.filter(it => it.isOutOfSight === false);
-    const distanceToNextBox = first.box.pos.left - (this.player.box.pos.left + this.player.box.pos.width);
-    this.ctx.fillText(`next box: ${distanceToNextBox} m`, this.canvas.nativeElement.width - 200, 150);
+    this.stats.draw(this.ctx, this.distance, this.player, this.enemies);
+
 
     if (this.distance % 1000 === 0) {
       this.difficulty += .5;
@@ -126,6 +119,7 @@ export class GameComponent implements OnInit {
   play() {
 
     this.isGameOver = false;
+    this.stats = new Stats(this.canvas.nativeElement);
     this.floor = new Floor(this.canvas.nativeElement);
     this.background = new Background(this.canvas.nativeElement, this.wallSprite.nativeElement);
 
