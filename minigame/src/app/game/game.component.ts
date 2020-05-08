@@ -22,7 +22,7 @@ function isCollide(a: Position, b: Position) {
 }
 
 @Component({
-  selector: 'app-root',
+  selector: 'game',
   templateUrl: 'game.component.html',
   styles: ['canvas { border-style: solid }']
 })
@@ -30,6 +30,8 @@ export class GameComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('heroSprite', { static: true }) heroSprite: ElementRef<HTMLImageElement>;
   @ViewChild('wallSprite', { static: true }) wallSprite: ElementRef<HTMLImageElement>;
+  @ViewChild('floorSprite', { static: true }) floorSprite: ElementRef<HTMLImageElement>;
+  @ViewChild('cloudSprite', { static: true }) cloudSprite: ElementRef<HTMLImageElement>;
 
   ctx: CanvasRenderingContext2D;
   requestId: number;
@@ -71,10 +73,10 @@ export class GameComponent implements OnInit {
     if (this.isGameOver) {
       return;
     }
-    this.distance += 1;
+    this.distance += .5;
 
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-    this.background.draw(this.ctx);
+    this.background.draw(this.ctx, this.distance);
     this.floor.draw(this.ctx);
     this.player.draw(this.ctx, this.distance);
 
@@ -120,8 +122,12 @@ export class GameComponent implements OnInit {
 
     this.isGameOver = false;
     this.stats = new Stats(this.canvas.nativeElement);
-    this.floor = new Floor(this.canvas.nativeElement);
-    this.background = new Background(this.canvas.nativeElement, this.wallSprite.nativeElement);
+    this.floor = new Floor(this.canvas.nativeElement, this.floorSprite.nativeElement);
+    this.background = new Background(
+      this.canvas.nativeElement,
+      this.wallSprite.nativeElement,
+      this.cloudSprite.nativeElement
+    );
 
     /***
     * hero sprite taken from
@@ -131,6 +137,9 @@ export class GameComponent implements OnInit {
     * wall background 
     * https://opengameart.org/content/handpainted-stone-wall-textures
     * CC-BY 4.0 & CC0 by PamNawi
+    * 
+    * 
+    * https://crateboy.itch.io/crateboy-2007-2014
     */
 
     this.player = new Player(this.floor, this.heroSprite.nativeElement);

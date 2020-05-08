@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { GameComponent } from './game/game.component';
 import { VisualComponent } from './visual/visual.component';
+import { AppRoutingModule } from './routing/app-routing.module';
+import { RootComponent } from './routing/root.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -10,13 +13,13 @@ import { VisualComponent } from './visual/visual.component';
     VisualComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [
-    //PointFinderComponent
-    //VisualComponent 
-    GameComponent
+    RootComponent
   ]
 })
 export class AppModule { }

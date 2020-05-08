@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
 
-
-
-console.log(tf);
 @Component({
   selector: 'app-root',
   templateUrl: './visual.component.html',

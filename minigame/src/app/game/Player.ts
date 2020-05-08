@@ -71,7 +71,7 @@ export class Player {
 
     switch (this.animationType) {
       case 'walk':
-        if (distance % 35 === 0) {
+        if (distance % 12 === 0) {
           nextSpriteIntex++
         }
         break;
